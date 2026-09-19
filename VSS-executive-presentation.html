@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Veterinary Surgery Specialists — Zero to Hero</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap');
+*{margin:0;padding:0;box-sizing:border-box;}
+html,body{height:100%;width:100%;overflow:hidden;font-family:'Inter',Arial,sans-serif;background:#08080f;}
+.container{width:100vw;height:100vh;position:relative;overflow:hidden;}
+.sr{position:absolute;clip:rect(0,0,0,0);clip-path:inset(50%);width:1px;height:1px;overflow:hidden;white-space:nowrap;}
+.cw{width:100%;height:calc(100vh - 60px);position:relative;overflow:hidden;}
+.c{position:absolute;top:0;left:0;width:100%;height:100%;display:none;flex-direction:column;overflow:hidden;}
+
+/* SHOW ACTIVE — 13 slides */
+#s1:checked~.cw .c:nth-child(1),#s2:checked~.cw .c:nth-child(2),#s3:checked~.cw .c:nth-child(3),#s4:checked~.cw .c:nth-child(4),#s5:checked~.cw .c:nth-child(5),#s6:checked~.cw .c:nth-child(6),#s7:checked~.cw .c:nth-child(7),#s8:checked~.cw .c:nth-child(8),#s9:checked~.cw .c:nth-child(9),#s10:checked~.cw .c:nth-child(10),#s11:checked~.cw .c:nth-child(11),#s12:checked~.cw .c:nth-child(12),#s13:checked~.cw .c:nth-child(13){display:flex;}
+
+/* NAV */
+.nc{position:fixed;bottom:0;left:0;right:0;height:60px;background:rgba(8,8,15,0.96);border-top:1px solid rgba(255,255,255,0.05);display:flex;align-items:center;justify-content:center;gap:14px;z-index:100;}
+.bp,.bn{display:flex;align-items:center;justify-content:center;width:36px;height:36px;background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.65);font-size:20px;cursor:pointer;font-weight:700;border-radius:50%;transition:background .2s;border:none;}
+.bp:hover,.bn:hover{background:rgba(255,255,255,0.18);color:#fff;}
+.ind{display:flex;gap:5px;align-items:center;}
+.d{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,0.2);cursor:pointer;display:inline-block;transition:background .2s;}
+.sn{font-size:13px;color:rgba(255,255,255,0.5);min-width:56px;text-align:center;font-weight:600;letter-spacing:1px;}
+
+/* active dots */
+#s1:checked~.nc .ind .d:nth-child(1),#s2:checked~.nc .ind .d:nth-child(2),#s3:checked~.nc .ind .d:nth-child(3),#s4:checked~.nc .ind .d:nth-child(4),#s5:checked~.nc .ind .d:nth-child(5),#s6:checked~.nc .ind .d:nth-child(6),#s7:checked~.nc .ind .d:nth-child(7),#s8:checked~.nc .ind .d:nth-child(8),#s9:checked~.nc .ind .d:nth-child(9),#s10:checked~.nc .ind .d:nth-child(10),#s11:checked~.nc .ind .d:nth-child(11),#s12:checked~.nc .ind .d:nth-child(12),#s13:checked~.nc .ind .d:nth-child(13){background:#6366f1;}
+
+/* ── SHARED ── */
+.glow{position:absolute;border-radius:50%;pointer-events:none;}
+.ey{font-size:13px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(99,102,241,0.75);}
+.bigh{font-size:80px;font-weight:900;line-height:1.0;color:#fff;letter-spacing:-2px;}
+.medh{font-size:52px;font-weight:900;line-height:1.05;color:#fff;letter-spacing:-1px;}
+
+/* ── SLIDE 1: TITLE ── */
+.s1{background:#08080f;justify-content:center;padding:80px 100px;overflow:hidden;}
+.s1 .g1{width:700px;height:700px;top:-200px;right:-150px;background:radial-gradient(circle,rgba(99,102,241,0.18) 0%,transparent 65%);}
+.s1 .g2{width:400px;height:400px;bottom:-80px;left:-60px;background:radial-gradient(circle,rgba(168,85,247,0.1) 0%,transparent 65%);}
+.s1 .ey{margin-bottom:24px;}
+.s1 .bigh{margin-bottom:28px;background:linear-gradient(140deg,#fff 50%,rgba(255,255,255,0.4));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.s1 .sub{font-size:22px;color:rgba(255,255,255,0.4);font-weight:300;margin-bottom:56px;line-height:1.5;max-width:620px;}
+.s1 .chips{display:flex;gap:10px;flex-wrap:wrap;}
+.chip{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.55);font-size:13px;font-weight:600;padding:9px 20px;border-radius:100px;}
+.chip.a{background:rgba(99,102,241,0.13);border-color:rgba(99,102,241,0.38);color:#a5b4fc;}
+
+/* ── SLIDE 2: PROCESS + NORTH STAR (Timeline spine) ── */
+.s2{background:#0d0d18;padding:0;overflow:hidden;flex-direction:column!important;}
+.s2-header{padding:52px 80px 32px;border-bottom:1px solid rgba(255,255,255,0.05);display:flex;flex-direction:column;gap:10px;flex-shrink:0;}
+.s2-header .ey{margin:0;}
+.s2-header .medh{margin:0;}
+.s2-body{display:flex;flex:1;overflow:hidden;}
+.s2-left{width:50%;height:100%;display:flex;flex-direction:column;justify-content:center;padding:48px 80px;border-right:1px solid rgba(255,255,255,0.05);}
+.s2-right{width:50%;height:100%;display:flex;flex-direction:column;justify-content:center;padding:48px 80px;}
+.nsq{font-size:20px;color:rgba(255,255,255,0.5);font-weight:300;line-height:1.75;padding-left:24px;border-left:3px solid #6366f1;}
+.nsq strong{color:rgba(255,255,255,0.88);font-weight:600;}
+.s2-vision-label{font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(99,102,241,0.65);margin-bottom:20px;}
+/* Timeline */
+.timeline{position:relative;padding-left:52px;}
+.timeline-spine{position:absolute;left:18px;top:10px;bottom:10px;width:1.5px;background:rgba(255,255,255,0.08);}
+.tl-item{position:relative;padding:18px 0;display:flex;align-items:center;gap:28px;}
+.tl-item:not(:last-child){border-bottom:1px solid rgba(255,255,255,0.05);}
+.tl-dot{position:absolute;left:-42px;width:16px;height:16px;border-radius:50%;background:#0d0d18;border:1.5px solid rgba(255,255,255,0.18);flex-shrink:0;}
+.tl-item.active .tl-dot{width:18px;height:18px;left:-43px;background:#6366f1;border-color:#6366f1;box-shadow:0 0 0 4px rgba(99,102,241,0.2);}
+.tl-label{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.22);width:60px;flex-shrink:0;}
+.tl-item.active .tl-label{color:rgba(99,102,241,0.8);}
+.tl-title{font-size:26px;font-weight:800;color:rgba(255,255,255,0.38);flex:1;}
+.tl-item.active .tl-title{color:#fff;}
+.tl-tag{font-size:11px;font-weight:600;color:rgba(255,255,255,0.18);letter-spacing:1px;text-transform:uppercase;white-space:nowrap;}
+.tl-item.active .tl-tag{color:#6366f1;font-size:12px;}
+
+/* ── TOPIC SLIDES (PILLARS) ── */
+.stopic{flex-direction:row!important;padding:0;overflow:hidden;position:relative;}
+.stopic .left{width:40%;height:100%;display:flex;flex-direction:column;justify-content:flex-end;padding:64px 56px;position:relative;z-index:2;flex-shrink:0;border-right:1px solid rgba(255,255,255,0.06);}
+.stopic .right{flex:1;height:100%;display:flex;flex-direction:column;justify-content:flex-start;padding:64px 56px;overflow-y:auto;}
+.stopic .topic-num{font-size:160px;font-weight:900;line-height:1;color:rgba(255,255,255,0.03);position:absolute;top:24px;left:32px;letter-spacing:-6px;pointer-events:none;}
+.stopic .ey{margin-bottom:14px;}
+.stopic .topic-title{font-size:52px;font-weight:900;color:#fff;line-height:1.0;letter-spacing:-1.5px;margin-bottom:16px;}
+.stopic .topic-pillar{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.25);margin-bottom:28px;}
+.stopic .jira-list{display:flex;flex-direction:column;gap:10px;padding-bottom:32px;}
+.jcard{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);padding:20px 22px;}
+.jcard .jid{font-size:10px;font-weight:700;letter-spacing:2px;margin-bottom:10px;}
+.jcard .jstory{font-size:16px;color:rgba(255,255,255,0.75);line-height:1.6;font-weight:400;}
+.jcard .jpersona{font-size:11px;color:rgba(255,255,255,0.25);margin-top:10px;font-weight:600;text-transform:uppercase;letter-spacing:1px;}
+
+/* accent left panel tints + color overrides */
+.stopic .right{background:#08080f;}
+.acc-indigo .left{background:linear-gradient(160deg,rgba(99,102,241,0.09) 0%,transparent 55%);}
+.acc-indigo .ey,.acc-indigo .jid{color:rgba(99,102,241,0.85);}
+.acc-green .left{background:linear-gradient(160deg,rgba(52,211,153,0.08) 0%,transparent 55%);}
+.acc-green .ey,.acc-green .jid{color:rgba(52,211,153,0.85);}
+.acc-rose .left{background:linear-gradient(160deg,rgba(251,113,133,0.08) 0%,transparent 55%);}
+.acc-rose .ey,.acc-rose .jid{color:rgba(251,113,133,0.85);}
+.acc-amber .left{background:linear-gradient(160deg,rgba(251,191,36,0.08) 0%,transparent 55%);}
+.acc-amber .ey,.acc-amber .jid{color:rgba(251,191,36,0.85);}
+.acc-violet .left{background:linear-gradient(160deg,rgba(167,139,250,0.08) 0%,transparent 55%);}
+.acc-violet .ey,.acc-violet .jid{color:rgba(167,139,250,0.85);}
+.acc-sky .left{background:linear-gradient(160deg,rgba(56,189,248,0.08) 0%,transparent 55%);}
+.acc-sky .ey,.acc-sky .jid{color:rgba(56,189,248,0.85);}
+
+/* ── SLIDE 13: ACTION ── */
+.s13{background:#08080f;padding:72px 96px;justify-content:center;overflow:hidden;}
+.s13 .g1{width:600px;height:600px;bottom:-200px;right:-100px;background:radial-gradient(circle,rgba(99,102,241,0.12) 0%,transparent 65%);}
+.s13 .ey{margin-bottom:16px;}
+.s13 .medh{margin-bottom:8px;}
+.s13 .sub2{font-size:18px;color:rgba(255,255,255,0.3);margin-bottom:40px;font-weight:400;}
+.acts{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:32px;}
+.act{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);padding:32px 26px;}
+.act .ic{font-size:36px;margin-bottom:18px;}
+.act h4{font-size:20px;font-weight:800;color:#fff;margin-bottom:10px;}
+.act p{font-size:14px;color:rgba(255,255,255,0.4);line-height:1.7;}
+.act.hot{background:rgba(99,102,241,0.1);border-color:rgba(99,102,241,0.3);}
+.act.hot h4{color:#a5b4fc;}
+.act.hot p{color:rgba(165,180,252,0.65);}
+.szrow{display:flex;gap:10px;align-items:center;flex-wrap:wrap;}
+.szl{font-size:12px;color:rgba(255,255,255,0.22);margin-right:8px;font-weight:700;letter-spacing:2px;text-transform:uppercase;}
+.sz{padding:10px 20px;font-size:13px;font-weight:700;border-radius:8px;}
+.xs{background:rgba(74,222,128,0.1);color:#4ade80;}
+.ss{background:rgba(56,189,248,0.1);color:#38bdf8;}
+.sm{background:rgba(251,191,36,0.1);color:#fbbf24;}
+.sl{background:rgba(251,113,133,0.1);color:#fb7185;}
+.sxl{background:rgba(167,139,250,0.1);color:#a78bfa;}
+
+/* ── SUPPLEMENT: standard content slides (same design language) ── */
+.std{background:#0d0d18;padding:52px 80px 76px;justify-content:flex-start;gap:28px;overflow:hidden;position:relative;}
+.std .shead{display:flex;flex-direction:column;gap:10px;flex-shrink:0;}
+.std .shead .ey{margin:0;}
+.std .shead .medh{margin:0;}
+.note{font-size:12px;color:rgba(255,255,255,0.28);font-weight:400;margin-top:auto;}
+.statn{font-size:48px;font-weight:900;color:#fff;letter-spacing:-1.5px;margin-bottom:12px;line-height:1;}
+.acc-green .statn{color:#6ee7b7;}.acc-rose .statn{color:#fda4af;}.acc-amber .statn{color:#fcd34d;}.acc-sky .statn{color:#7dd3fc;}
+.objx{font-size:16px;color:rgba(255,255,255,0.5);font-weight:300;line-height:1.6;border-left:3px solid rgba(99,102,241,0.6);padding-left:16px;margin-bottom:8px;}
+
+/* positioning statement slide */
+.sstate{background:#08080f;justify-content:center;align-items:center;text-align:center;padding:56px 96px;overflow:hidden;position:relative;}
+.sstate .g1{width:680px;height:680px;top:-220px;left:-120px;background:radial-gradient(circle,rgba(99,102,241,0.14) 0%,transparent 65%);}
+.sstate .bigq{font-size:44px;font-weight:900;color:#fff;letter-spacing:-1.5px;line-height:1.18;max-width:1000px;margin:18px auto 6px;}
+.sstate .bigq em{font-style:normal;background:linear-gradient(120deg,#a5b4fc,#6366f1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.sstate .subq{font-size:17px;color:rgba(255,255,255,0.4);font-weight:300;max-width:680px;margin:0 auto;line-height:1.6;}
+.p3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;max-width:1020px;margin:46px auto 0;width:100%;text-align:left;}
+.p3 .act h4{font-size:22px;}
+
+/* SWOT 2x2 */
+.swot{display:grid;grid-template-columns:1fr 1fr;gap:14px;flex:1;min-height:0;}
+.swot-card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);padding:22px 26px;display:flex;flex-direction:column;overflow:hidden;}
+.swot-h{font-size:13px;font-weight:800;letter-spacing:2px;text-transform:uppercase;margin-bottom:14px;}
+.swot-card ul{list-style:none;display:flex;flex-direction:column;gap:8px;}
+.swot-card li{font-size:14px;color:rgba(255,255,255,0.6);line-height:1.5;padding-left:18px;position:relative;}
+.swot-card li:before{content:"";position:absolute;left:0;top:7px;width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,0.25);}
+
+/* roadmap phase cards */
+.phase-tag{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:10px;}
+.phase-meta{font-size:12px;color:rgba(255,255,255,0.32);margin-top:14px;font-weight:600;}
+</style>
+</head>
+<body>
+<div class="container">
+<input type="radio" class="sr" name="nav" id="s1" checked/>
+<input type="radio" class="sr" name="nav" id="s2"/>
+<input type="radio" class="sr" name="nav" id="s3"/>
+<input type="radio" class="sr" name="nav" id="s4"/>
+<input type="radio" class="sr" name="nav" id="s5"/>
+<input type="radio" class="sr" name="nav" id="s6"/>
+<input type="radio" class="sr" name="nav" id="s7"/>
+<input type="radio" class="sr" name="nav" id="s8"/>
+<input type="radio" class="sr" name="nav" id="s9"/>
+<input type="radio" class="sr" name="nav" id="s10"/>
+<input type="radio" class="sr" name="nav" id="s11"/>
+<input type="radio" class="sr" name="nav" id="s12"/>
+<input type="radio" class="sr" name="nav" id="s13"/>
+
+<div class="cw">
+
+<!-- ══════ SLIDE 1 — TITLE ══════ -->
+<div class="c s1">
+  <div class="glow g1"></div>
+  <div class="glow g2"></div>
+  <div class="ey">Veterinary Surgery Specialists · West Berlin, NJ · Executive Strategy</div>
+  <div class="bigh" style="margin-top:20px;">From Zero<br/>to Hero</div>
+  <div class="sub" style="margin-top:24px;">A 3-year plan to make VSS the region's trusted <strong style="color:rgba(255,255,255,0.7);font-weight:600;">independent surgical-recovery destination</strong> — winning where the corporates can't.</div>
+  <div class="chips">
+    <span class="chip a">Continuity</span>
+    <span class="chip a">Access</span>
+    <span class="chip a">Honesty</span>
+    <span class="chip">Focus · Resilience</span>
+  </div>
+</div>
+
+<!-- ══════ SLIDE 2 — NORTH STAR + JOURNEY ══════ -->
+<div class="c s2">
+  <div class="s2-header">
+    <div class="ey">The North Star</div>
+    <div class="medh">Where We're Headed</div>
+  </div>
+  <div class="s2-body">
+    <div class="s2-left">
+      <div class="s2-vision-label">Our Mission</div>
+      <div class="nsq">Restore every pet's <strong>health, mobility, and quality of life</strong> through exceptional specialty surgery and <strong>transparent, affordable care</strong> — guiding every patient, alongside their family and referring vet, from diagnosis to <strong>full recovery</strong>.</div>
+    </div>
+    <div class="s2-right">
+      <div class="timeline">
+        <div class="timeline-spine"></div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-label">Step 1</div>
+          <div class="tl-title">Research</div>
+          <div class="tl-tag">The Landscape</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-label">Step 2</div>
+          <div class="tl-title">Diagnose</div>
+          <div class="tl-tag">The "Zero"</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-label">Step 3</div>
+          <div class="tl-title">5 Pillars</div>
+          <div class="tl-tag">The Strategy</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-label">Step 4</div>
+          <div class="tl-title">Roadmap</div>
+          <div class="tl-tag">The How</div>
+        </div>
+        <div class="tl-item active">
+          <div class="tl-dot"></div>
+          <div class="tl-label">Now</div>
+          <div class="tl-title">Execute</div>
+          <div class="tl-tag">→ You're Here</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ SLIDE 3 — MARKET OPPORTUNITY ══════ -->
+<div class="c std">
+  <div class="shead">
+    <div class="ey">The Market</div>
+    <div class="medh">A Durable Demand Wave</div>
+  </div>
+  <div class="acts" style="margin-bottom:0;">
+    <div class="act acc-green"><div class="statn">~8.6%</div><p>CAGR — surgery is the <strong style="color:rgba(255,255,255,0.6)">fastest-growing</strong> veterinary segment</p></div>
+    <div class="act acc-sky"><div class="statn">~14M</div><p>U.S. dogs with osteoarthritis — the aging-pet wave fuelling orthopedics</p></div>
+    <div class="act acc-amber"><div class="statn">$4.7B</div><p>Pet-insurance premiums, <strong style="color:rgba(255,255,255,0.6)">+21% YoY</strong> — insured owners approve far more surgery</p></div>
+    <div class="act acc-rose"><div class="statn">~75%</div><p>of specialty/ER is <strong style="color:rgba(255,255,255,0.6)">corporate-owned</strong> &amp; facing pricing backlash — a trust gap to win</p></div>
+  </div>
+  <div class="note">Headwind to respect: 2024–26 is a cyclical trough (declining visits, peak price-sensitivity) — so the ramp must be cash-disciplined. Figures are cited industry benchmarks; practice targets calibrate to actuals in Phase 0.</div>
+</div>
+
+<!-- ══════ SLIDE 4 — THE "ZERO" DIAGNOSIS ══════ -->
+<div class="c std">
+  <div class="shead">
+    <div class="ey">The Starting Point</div>
+    <div class="medh">A Scarce Asset in a Fragile Envelope</div>
+  </div>
+  <div class="acts" style="margin-bottom:0;">
+    <div class="act"><div class="ic">🏆</div><h4>The Asset</h4><p>A rare ACVS-SA surgeon — also CCRT &amp; CVAT. Surgery → rehab → pain under one clinician.</p></div>
+    <div class="act"><div class="ic">⚠️</div><h4>The Fragility</h4><p>100% of revenue rides on one surgeon. No ER / after-hours. No in-house CT/MRI.</p></div>
+    <div class="act"><div class="ic">📉</div><h4>The Commercial Gap</h4><p>No published pricing, thin digital presence, and the strongest differentiator sits unused.</p></div>
+    <div class="act"><div class="ic">🏟️</div><h4>The Arena</h4><p>Corporates dominate specialty; even the nearest independent is full-service 24/7. We must win on focus.</p></div>
+  </div>
+  <div class="note">"Zero" isn't a failing practice — it's a great surgeon and team trapped below their potential. The gaps are commercial and structural, not foundational.</div>
+</div>
+
+<!-- ══════ SLIDE 5 — STRATEGY & POSITIONING ══════ -->
+<div class="c sstate">
+  <div class="glow g1"></div>
+  <div class="ey">The Strategy</div>
+  <div class="bigq" style="margin-top:18px;">Don't out-<em>scale</em> the corporates.<br/>Out-<em>focus</em> them.</div>
+  <div class="subq">Become the region's trusted independent surgical-recovery destination — chosen by GPs and pet families on three proof-backed pillars.</div>
+  <div class="p3">
+    <div class="act hot"><h4>Continuity</h4><p>The surgeon you meet is the surgeon who operates and follows recovery — impossible at rotating-staff corporates.</p></div>
+    <div class="act hot"><h4>Access</h4><p>Consults in days, not weeks — and a direct line to the surgeon, while large centers run 1hr+ waits.</p></div>
+    <div class="act hot"><h4>Honesty</h4><p>Transparent indicative pricing and no upsell — answering the documented corporate-pricing backlash.</p></div>
+  </div>
+</div>
+
+<!-- ══════ SLIDE 6 — PILLAR 01 ══════ -->
+<div class="c stopic acc-indigo" style="background:#08080f;">
+  <div class="topic-num">01</div>
+  <div class="left">
+    <div class="ey">Strategic Pillar · Foundation</div>
+    <div class="topic-title">Resilience<br/>&amp; Risk</div>
+    <div class="topic-pillar">Eliminate single-point failure</div>
+    <div class="objx">Remove the existential risks <strong style="color:rgba(255,255,255,0.7);font-weight:600;">before</strong> building anything else.</div>
+  </div>
+  <div class="right">
+    <div class="jira-list">
+      <div class="jcard"><div class="jid">KEY MOVE 1</div><div class="jstory">Secure relief / locum surgeon coverage now; recruit a second surgeon by Phase 2.</div><div class="jpersona">KPI · ≥2 surgeons / 100% of days covered</div></div>
+      <div class="jcard"><div class="jid">KEY MOVE 2</div><div class="jstory">Write a post-op emergency protocol and a formal 24/7-ER transfer partnership.</div><div class="jpersona">KPI · ER protocol in place (Phase 0)</div></div>
+      <div class="jcard"><div class="jid">KEY MOVE 3</div><div class="jstory">Key-person insurance plus cross-trained technicians to spread dependency.</div><div class="jpersona">KPI · lead-surgeon revenue concentration ↓</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ SLIDE 7 — PILLAR 02 ══════ -->
+<div class="c stopic acc-green" style="background:#08080f;">
+  <div class="topic-num">02</div>
+  <div class="left">
+    <div class="ey">Strategic Pillar · Priority</div>
+    <div class="topic-title">Revenue &amp;<br/>Profitability</div>
+    <div class="topic-pillar">Monetize the surgeon first</div>
+    <div class="objx" style="border-left-color:rgba(52,211,153,0.6);">Fill the existing schedule before adding capacity — the <strong style="color:rgba(255,255,255,0.7);font-weight:600;">highest-ROI</strong> move.</div>
+  </div>
+  <div class="right">
+    <div class="jira-list">
+      <div class="jcard"><div class="jid">PRICING</div><div class="jstory">Publish indicative price ranges, hold estimate discipline, and offer payment plans.</div><div class="jpersona">Lever · attacks cost anxiety, lifts conversion</div></div>
+      <div class="jcard"><div class="jid">UTILIZATION</div><div class="jstory">Technician leverage + forward-booking every recheck to keep the OR full.</div><div class="jpersona">KPI · schedule utilization 75%+</div></div>
+      <div class="jcard"><div class="jid">MARGIN</div><div class="jstory">Shift case-mix toward high-value orthopedics; drive client insurance enrollment.</div><div class="jpersona">KPI · EBITDA 18–25% · revenue/DVM ≥ $700K</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ SLIDE 8 — PILLAR 03 ══════ -->
+<div class="c stopic acc-rose" style="background:#08080f;">
+  <div class="topic-num">03</div>
+  <div class="left">
+    <div class="ey">Strategic Pillar · Priority</div>
+    <div class="topic-title">Referral &amp;<br/>Brand Growth</div>
+    <div class="topic-pillar">Become the default referral</div>
+    <div class="objx" style="border-left-color:rgba(251,113,133,0.6);">Win GP loyalty and own the <strong style="color:rgba(255,255,255,0.7);font-weight:600;">"independent &amp; honest"</strong> brand.</div>
+  </div>
+  <div class="right">
+    <div class="jira-list">
+      <div class="jcard"><div class="jid">GP PROGRAM</div><div class="jstory">Monthly CE, a direct surgeon line, and case updates within 24 hours.</div><div class="jpersona">KPI · 50–100+ active referring GPs</div></div>
+      <div class="jcard"><div class="jid">DIGITAL FRONT DOOR</div><div class="jstory">Transparent pricing page, SEO/content engine, and real-time online booking.</div><div class="jpersona">KPI · 100+ reviews @ 4.8★</div></div>
+      <div class="jcard"><div class="jid">CONVERSION</div><div class="jstory">A reviews engine and fast scheduling capture insured, price-searching owners.</div><div class="jpersona">KPI · referral conversion 60–80%</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ SLIDE 9 — PILLAR 04 ══════ -->
+<div class="c stopic acc-amber" style="background:#08080f;">
+  <div class="topic-num">04</div>
+  <div class="left">
+    <div class="ey">Strategic Pillar · Priority</div>
+    <div class="topic-title">Service-Line<br/>Expansion</div>
+    <div class="topic-pillar">Deepen the recovery continuum</div>
+    <div class="objx" style="border-left-color:rgba(251,191,36,0.6);">Extend surgery → imaging → rehab → pain — <strong style="color:rgba(255,255,255,0.7);font-weight:600;">not</strong> unrelated specialties.</div>
+  </div>
+  <div class="right">
+    <div class="jira-list">
+      <div class="jcard"><div class="jid">IMAGING</div><div class="jstory">In-house or partnered CT (lease first) for sharper surgical planning and less case leakage.</div><div class="jpersona">KPI · CT cases / month</div></div>
+      <div class="jcard"><div class="jid">REHAB + REGEN</div><div class="jstory">Complete the rehab suite (underwater treadmill) and add a PRP / structured pain program.</div><div class="jpersona">KPI · post-op rehab attach rate</div></div>
+      <div class="jcard"><div class="jid">DISCIPLINE</div><div class="jstory">Reject IM / oncology / neurology and an owned 24/7 ER — focus is the moat.</div><div class="jpersona">Guardrail · stay a surgical destination</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ SLIDE 10 — PILLAR 05 ══════ -->
+<div class="c stopic acc-violet" style="background:#08080f;">
+  <div class="topic-num">05</div>
+  <div class="left">
+    <div class="ey">Strategic Pillar · Priority</div>
+    <div class="topic-title">People &amp;<br/>Operations</div>
+    <div class="topic-pillar">Leverage scarce surgeon time</div>
+    <div class="objx" style="border-left-color:rgba(167,139,250,0.6);">Make <strong style="color:rgba(255,255,255,0.7);font-weight:600;">culture a recruiting weapon</strong> corporates can't match.</div>
+  </div>
+  <div class="right">
+    <div class="jira-list">
+      <div class="jcard"><div class="jid">TECH BENCH</div><div class="jstory">Grow credentialed techs to a 3:1–5:1 ratio so the surgeon only does surgeon-level work.</div><div class="jpersona">KPI · tech : surgeon 3:1+</div></div>
+      <div class="jcard"><div class="jid">CULTURE</div><div class="jstory">Title protection, an EAP, predictable hours, and a partnership track for surgeon #2.</div><div class="jpersona">KPI · staff turnover below industry</div></div>
+      <div class="jcard"><div class="jid">SYSTEMS</div><div class="jstory">Standardized surgical workflow, a modern cloud PIMS, and a focused KPI dashboard.</div><div class="jpersona">KPI · 5–7 core metrics, managed weekly</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ SLIDE 11 — SWOT ══════ -->
+<div class="c std">
+  <div class="shead">
+    <div class="ey">Strategic Assessment</div>
+    <div class="medh">SWOT</div>
+  </div>
+  <div class="swot">
+    <div class="swot-card"><div class="swot-h" style="color:#6ee7b7;">Strengths</div><ul>
+      <li>Scarce triple-credentialed ACVS surgeon (surgery + rehab + acupuncture)</li>
+      <li>Independence — pricing freedom amid corporate backlash</li>
+      <li>Surgeon continuity + direct GP access</li>
+      <li>Referral coordinator already in seat; CareCredit / Trupanion rails</li>
+    </ul></div>
+    <div class="swot-card"><div class="swot-h" style="color:#fda4af;">Weaknesses</div><ul>
+      <li>Single-surgeon key-person risk (100% revenue)</li>
+      <li>No ER / after-hours; no in-house CT/MRI</li>
+      <li>Thin digital; no published pricing</li>
+      <li>Strongest differentiator (transparency) unused; form-only GP program</li>
+    </ul></div>
+    <div class="swot-card"><div class="swot-h" style="color:#7dd3fc;">Opportunities</div><ul>
+      <li>Aging-pet / orthopedic demand wave</li>
+      <li>Pricing-transparency vacuum + corporate backlash</li>
+      <li>Pet-insurance growth lifts surgical approvals</li>
+      <li>Rehab / regenerative / pain boom; independent-surgeon talent preference</li>
+    </ul></div>
+    <div class="swot-card"><div class="swot-h" style="color:#fcd34d;">Threats</div><ul>
+      <li>2024–26 cyclical downturn</li>
+      <li>Corporate scale + ER funnels (BluePearl, RBVH, Saint Francis)</li>
+      <li>Capable independent neighbors (Mount Laurel, NorthStar)</li>
+      <li>Surgeon scarcity makes hiring #2 hard; single-complication risk w/o ER</li>
+    </ul></div>
+  </div>
+</div>
+
+<!-- ══════ SLIDE 12 — ROADMAP ══════ -->
+<div class="c std">
+  <div class="shead">
+    <div class="ey">Execution · Self-Funding</div>
+    <div class="medh">The Zero-to-Hero Roadmap</div>
+  </div>
+  <div class="acts" style="margin-bottom:0;">
+    <div class="act"><div class="phase-tag" style="color:#a5b4fc;">Phase 0 · 0–3 mo</div><h4>Stabilize &amp; De-risk</h4><p>Relief coverage, ER protocol + transfer partner, capture a real KPI baseline.</p><div class="phase-meta">Capex: minimal</div></div>
+    <div class="act"><div class="phase-tag" style="color:#6ee7b7;">Phase 1 · 3–9 mo</div><h4>Commercial Ignition</h4><p>Pricing, reviews/SEO/booking, GP program, insurance, fill the schedule.</p><div class="phase-meta">Capex: low</div></div>
+    <div class="act"><div class="phase-tag" style="color:#fcd34d;">Phase 2 · 9–24 mo</div><h4>Capability &amp; Growth</h4><p>CT, full rehab suite, PRP/pain, recruit 2nd surgeon, grow tech bench.</p><div class="phase-meta">Capex: staged</div></div>
+    <div class="act"><div class="phase-tag" style="color:#c4b5fd;">Phase 3 · 24–36 mo</div><h4>Scale &amp; Moat</h4><p>Mobile/teleconsult, brand leadership, enterprise value (11–13× EBITDA).</p><div class="phase-meta">Capex: selective</div></div>
+  </div>
+  <div class="szrow">
+    <span class="szl">Hero KPIs</span>
+    <span class="sz xs">Utilization 75%+</span>
+    <span class="sz ss">EBITDA 18–25%</span>
+    <span class="sz sm">50–100+ GPs</span>
+    <span class="sz sl">100+ reviews @ 4.8★</span>
+    <span class="sz sxl">≥2 surgeons</span>
+  </div>
+</div>
+
+<!-- ══════ SLIDE 13 — ACTION ══════ -->
+<div class="c s13">
+  <div class="glow g1"></div>
+  <div class="ey">Phase 0 · The Next 90 Days</div>
+  <div class="medh">What We Do Now</div>
+  <div class="sub2">Low-capex, high-ROI — these wins fund everything that follows.</div>
+  <div class="acts">
+    <div class="act hot"><div class="ic">🛡️</div><h4>De-risk</h4><p>Relief-surgeon coverage + a written ER / transfer protocol. Non-negotiable, first.</p></div>
+    <div class="act"><div class="ic">💵</div><h4>Publish Prices</h4><p>Indicative ranges for the top procedures, plus payment-plan options.</p></div>
+    <div class="act"><div class="ic">🤝</div><h4>GP SLA</h4><p>24-hour case updates, a direct surgeon line, and a monthly CE lunch.</p></div>
+    <div class="act"><div class="ic">⭐</div><h4>Reviews + Booking</h4><p>Turn on the reviews engine and real-time online booking; surface rehab &amp; acupuncture.</p></div>
+  </div>
+  <div class="szrow">
+    <span class="szl">Then</span>
+    <span class="sz xs">Measure first</span>
+    <span class="sz ss">Calibrate targets to actuals</span>
+    <span class="sz sm">Fund Phase 2 from Phase 1 cash</span>
+  </div>
+</div>
+
+</div><!-- .cw -->
+
+<div class="nc">
+  <button class="bp" id="btn-prev" onclick="navPrev()">‹</button>
+  <div class="ind"><label for="s1" class="d"></label><label for="s2" class="d"></label><label for="s3" class="d"></label><label for="s4" class="d"></label><label for="s5" class="d"></label><label for="s6" class="d"></label><label for="s7" class="d"></label><label for="s8" class="d"></label><label for="s9" class="d"></label><label for="s10" class="d"></label><label for="s11" class="d"></label><label for="s12" class="d"></label><label for="s13" class="d"></label></div>
+  <div class="sn" id="pg-num"></div>
+  <button class="bn" id="btn-next" onclick="navNext()">›</button>
+</div>
+</div>
+
+<script>
+(function(){
+  var N=13, cur=1;
+  var radios=[], dots=[];
+  for(var i=1;i<=N;i++){
+    radios.push(document.getElementById('s'+i));
+    dots.push(document.querySelector('.ind label:nth-child('+i+')'));
+  }
+  var pgNum=document.getElementById('pg-num');
+
+  function go(n){
+    cur=Math.max(1,Math.min(N,n));
+    radios[cur-1].checked=true;
+    dots.forEach(function(d,i){d.style.background=i===cur-1?'#6366f1':'rgba(255,255,255,0.2)';});
+    pgNum.textContent=(cur<10?'0':'')+cur+' / '+N;
+  }
+
+  window.navPrev=function(){go(cur-1);};
+  window.navNext=function(){go(cur+1);};
+
+  dots.forEach(function(d,i){d.onclick=function(){go(i+1);};});
+
+  document.addEventListener('keydown',function(e){
+    if(e.key==='ArrowRight'||e.key==='ArrowDown'||e.key==='PageDown'||e.key===' '){e.preventDefault();go(cur+1);}
+    else if(e.key==='ArrowLeft'||e.key==='ArrowUp'||e.key==='PageUp'||e.key==='Backspace'){e.preventDefault();go(cur-1);}
+    else if(e.key==='Home'){e.preventDefault();go(1);}
+    else if(e.key==='End'){e.preventDefault();go(N);}
+  });
+
+  go(1);
+})();
+</script>
+</body>
+</html>
