@@ -1,0 +1,31 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Claude Code
+.claude/
+
+# Playwright
+.playwright-mcp/
+.playwright-cli/
+
+# Node.js
+node_modules/
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
+dist/
+build/
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode/
+.idea/
+
+# Output/build artifacts
+out/
